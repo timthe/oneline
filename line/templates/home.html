@@ -5,10 +5,18 @@
 {% endblock %}
 
 {% block content %}
+<h2>Welcome {{ user }}</h2>
 <table>
   {% for item in items %}
-    <tr><td>{{ item.text }}</td><tr>
+    <tr>
+    	<td>{{ item.text }}</td>
+    	<td>{{ item.user }}</td>
+    	<td>{{ user.username }}</td>
+    	{% if user.username == item.user %}
+    	    <td><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a></td>
+                 <td><a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></td>
+             {% endif %}
+    <tr>
   {% endfor %}
 </table>
 {% endblock %}
-

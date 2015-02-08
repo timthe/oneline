@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="/line/edit/{{ item.pk }}/">
+    {{ form.text }}
+    {% csrf_token %}
+</form>
+
+{% endblock %}
+
