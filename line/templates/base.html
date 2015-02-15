@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang='utf-8'>
+<html lang='ko'>
 
 <head>
+    <meta charset='utf-8'>
     <title>One-line</title>
 </head>
 
 <body>
-    {% if user.is_anonymous %}
+    <a href="{% url 'home' %}">Home</a>
+    {% if not user.is_authenticated %}
+      <a href="{% url 'register' %}">Registration</a>
       <a href="{% url 'login' %}">login</a>
     {% else %}
       <a href="{% url 'logout' %}">logout</a>
+      <a href="{% url 'profile' %}">User</a>
     {% endif %}
 
-    {% block new_line %} {% endblock %}
     <h1>One line</h1>
     {% block content %} {% endblock %}
 </body>

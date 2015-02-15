@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+  {% for error in form.errors %}
+    <ul>
+      {% for field in form %}
+      <li>{{ field.errors|striptags }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+{% endif %}
+
+{% if picture_url %}
+  <img src="{{ picture_url }}"  />
+{% endif %}
+
+<h1>Change profile</h1>
+<form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

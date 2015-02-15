@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<form method="POST" action="/line/edit/{{ item.pk }}/">
-    {{ form.text }}
+<form method="POST" action="/line/edit_comment/{{ comment.pk }}/">
+    {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" name="submit" value="Edit"/>
 </form>

@@ -1,0 +1,14 @@
+{% if comments %}
+<h1>Comment</h1>
+{% for comment in comments %}
+    <tr>
+        <td>{{ comment.content }}</td>
+        <td>{{ comment.user }}</td>
+        <td>{{ comment.created }}</td>
+        {% if user.username == comment.user %}
+            <td><a href="{% url 'edit_comment' comment_id=comment.pk %}">Edit</a></td>
+        {% endif %}
+    <tr>
+    <hr>
+  {% endfor %}
+{% endif %}

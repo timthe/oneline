@@ -1,0 +1,19 @@
+<article class="item">
+    <h1>
+        [{{ item.category.name }}]
+    </h1>
+    {{ item.title }}<br>
+    {{ item.user }}<br>
+    {{ item.text|linebreaksbr }}<br>
+    {{ item.created }}<br>
+    {{ item.updated }}</br>
+</article>
+
+{% include '_comment.html' %}
+
+<form method="POST" action="{% url 'new_comment' item_id=item.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="submit" value="Add"/>
+    
+</form>

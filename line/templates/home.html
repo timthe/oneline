@@ -1,22 +1,32 @@
 {% extends 'base.html' %}
 
-{% block new_line %}
-<a id="new" href="/line/new">new_line</a>
-{% endblock %}
 
 {% block content %}
-<h2>Welcome {{ user }}</h2>
+
+{% if user.is_authenticated %}
+  <h2>Welcome {{ user }}</h2>
+{% else %}
+  <h2>Welcome!!</h2>
+{% endif %}
+
 <table>
   {% for item in items %}
     <tr>
-    	<td>{{ item.text }}</td>
+    	<td>{{ item.category }}</td>
+      <td>
+        <a href="{% url 'detail_view' item_pk=item.pk %}">{{ item.title }}
+        </a>
+      </td>
+      <td>{{ item.text }}</td>
     	<td>{{ item.user }}</td>
-    	<td>{{ user.username }}</td>
+      <td>{{ item.created|date:'Y-m-d H:i' }}</td>
     	{% if user.username == item.user %}
     	    <td><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a></td>
-                 <td><a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></td>
-             {% endif %}
+          <td><a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></td>
+      {% endif %}
     <tr>
   {% endfor %}
 </table>
+<a id="newcategory" href="{% url 'new_category' %}">new_category</a>
+<a id="newline" href="{% url 'new_line' %}">new_line</a>
 {% endblock %}
