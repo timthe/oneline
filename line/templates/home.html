@@ -3,14 +3,46 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-  <h2>Welcome {{ user }}</h2>
-{% else %}
-  <h2>Welcome!!</h2>
-{% endif %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>반갑습니다</h1>
+    <p>여기는 선천성 심장기형에 관심있는 사람들을 위한 곳입니다. 홈페이지는 크게 3부분으로 구성되어있는데, 선천성 심장기형에 대한 의학 정보를 제공하는 부분, 선천성 심장기형에 대한 실생활 정보를 제공하는 부분, 그리고 질문과 답변 부분입니다. 아무쪼록 원하시는 정보들을 찾을 수 있으시길 빌겠습니다.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">자세히 »</a></p>
+  </div>
+</div>
 
-<table>
-  {% for item in items %}
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2>의학 정보</h2>
+      <p>선천성 심장기형에 대한 다양한 의학정보가 있습니다.</p>
+      <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>실생활 정보</h2>
+      <p>임신, 출산, 진단, 수술 등 선천성 심장기형과 관련된 다양한 정보가 있습니다.</p>
+      <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+    </div>
+    <div class="col-md-4">
+      <h2>질문과 답변</h2>
+      <p>질문과 답변 코너입니다.</p>
+      <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+    </div>
+  </div>
+</div>
+</div>
+<hr>
+
+<div class="container">
+  {% if user.is_authenticated %}
+  <h2>Welcome {{ user }}</h2>
+  {% else %}
+  <h2>Welcome!!</h2>
+  {% endif %}
+
+  <table>
+    {% for item in items %}
     <tr>
     	<td>{{ item.category }}</td>
       <td>
@@ -18,15 +50,16 @@
         </a>
       </td>
       <td>{{ item.text }}</td>
-    	<td>{{ item.user }}</td>
+      <td>{{ item.user }}</td>
       <td>{{ item.created|date:'Y-m-d H:i' }}</td>
-    	{% if user.username == item.user %}
-    	    <td><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a></td>
-          <td><a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></td>
+      {% if user.username == item.user %}
+      <td><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a></td>
+      <td><a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></td>
       {% endif %}
-    <tr>
-  {% endfor %}
-</table>
-<a id="newcategory" href="{% url 'new_category' %}">new_category</a>
-<a id="newline" href="{% url 'new_line' %}">new_line</a>
-{% endblock %}
+      <tr>
+        {% endfor %}
+      </table>
+      <a id="newcategory" href="{% url 'new_category' %}">new_category</a>
+      <a id="newline" href="{% url 'new_line' %}">new_line</a>
+    </div>
+    {% endblock %}
