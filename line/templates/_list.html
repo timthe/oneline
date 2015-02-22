@@ -1,0 +1,23 @@
+{% if items %}
+<div class="col-sm-8 blog-main">
+{% for item in items %}
+      <div class="blog-post">
+        <h2 class="blog-post-title"><a href="{% url 'detail_view' item_pk=item.pk %}">{{ item.title }}</a></h2>
+        <p class="blog-post-meta">분류: {{ item.category }}</p>
+        <p class="blog-post-meta">{{ item.created|date:'Y-m-d' }} by {{ item.user }}</p>
+<!--       {% if item.picture %}
+        <img src="{{ item.picture.url }}"/>
+      {% endif %} -->
+      <p>{{ item.text|slice:":20" }} . . .</p>
+      <br>
+      <p class="text-left">
+        <a href="{% url 'detail_view' item_pk=item.pk %}">댓글</a>({{ item.comments.count }})
+      {% if user.username == item.user %}
+        <p class="text-right"><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a> or 
+        <a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></p>
+      {% endif %}
+    </div>
+    <hr>
+{% endfor %}
+</div>
+{% endif %}
