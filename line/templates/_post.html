@@ -1,13 +1,24 @@
-<article class="item">
-    <h1>
-        [{{ item.category.name }}]
-    </h1>
-    {{ item.title }}<br>
-    {{ item.user }}<br>
-    {{ item.text|linebreaksbr }}<br>
-    {{ item.created }}<br>
-    {{ item.updated }}</br>
-</article>
+<div class="container">
+    <div class="row">
+    <div class="col-sm-8 blog-main">
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{ item.title }}</a></h2>
+        <p class="blog-post-meta">분류: {{ item.category }}</p>
+        <p class="blog-post-meta">{{ item.created|date:'Y-m-d' }} by {{ item.user }}</p>
+      {% if item.picture %}
+        <img src="{{ item.picture.url }}"/>
+      {% endif %}
+      <p>{{ item.text }}</p>
+      <br>
+      <p class="text-left">
+      {% if user.username == item.user %}
+        <p class="text-right"><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a> or 
+        <a href="{% url 'delete_line' line_id=item.pk %}">Delete</a></p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
 
 {% include '_comment.html' %}
 

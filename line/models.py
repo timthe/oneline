@@ -14,8 +14,15 @@ class Category(models.Model):
 
 
 class Item(models.Model):
+    M_TYPE = (
+        ('JH', 'Medicine'),
+        ('MJ', 'Life'),
+        )
+
+    mtype = models.CharField(max_length=10, choices=M_TYPE)
     category = models.ForeignKey(Category, null=True, blank=True)
     title = models.CharField(max_length=256)
+    picture = models.ImageField(upload_to="item_images", blank=True)
     text = models.TextField()
     # 이 user 를 foreignkey 로 해서 하는 방법을 강구해보자
     user = models.CharField(max_length=256, null=True, blank=True)
@@ -31,9 +38,9 @@ class Item(models.Model):
 
 
 class Comment(models.Model):
+    item = models.ForeignKey(Item, related_name='comments')
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    item = models.ForeignKey(Item)
     user = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):

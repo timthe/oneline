@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     items = Item.objects.all()
-    return render(request, 'home.html', {'items' : items})
+    return render(request, 'home.html', {'items': items})
+
+def medicine_list(request):
+    items = Item.objects.filter(mtype='JH')
+    return render(request, 'list.html', {'items': items})
 
 def detail_view(request, item_pk):
     item = get_object_or_404(Item, id=item_pk)

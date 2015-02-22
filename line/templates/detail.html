@@ -1,5 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% include '_post.html' %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 blog-main">
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{ item.title }}</a></h2>
+        <p class="blog-post-meta">분류: {{ item.category }}</p>
+        <p class="blog-post-meta">{{ item.created|date:'Y-m-d' }} by {{ item.user }}</p>
+        {% if item.picture %}
+        <img src="{{ item.picture.url }}"/>
+        {% endif %}
+        <p>{{ item.text|linebreaks }}</p>
+        <span class="text-left">
+            <a href="#">댓글 달기</a>
+        </span>
+        {% if user.username == item.user %}
+        <span class="text-right"><a href="{% url 'edit_line' line_id=item.pk %}">Edit</a> or 
+            <a href="{% url 'delete_line' line_id=item.pk %}">Delete</a>
+        </span>
+        {% endif %}
+    </div>
+    <br>
+    <hr>
+</div>
+{% include '_sidebar.html' %}
+</div>
+</div>
+
+{% include '_comment.html' %}
+
+<div class='container'>
+<form method="POST" action="{% url 'new_comment' item_id=item.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="submit" value="Add"/>
+</form>
+</div>
+
 {% endblock %}

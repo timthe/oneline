@@ -1,14 +1,15 @@
 {% if comments %}
-<h1>Comment</h1>
 {% for comment in comments %}
-    <tr>
-        <td>{{ comment.content }}</td>
-        <td>{{ comment.user }}</td>
-        <td>{{ comment.created }}</td>
-        {% if user.username == comment.user %}
-            <td><a href="{% url 'edit_comment' comment_id=comment.pk %}">Edit</a></td>
-        {% endif %}
-    <tr>
-    <hr>
-  {% endfor %}
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <p class="text-left">{{ comment.content }}</p>
+          <p class="text-right">By {{ comment.user }}, At {{ comment.created }}</p>
+          {% if user.username == comment.user %}
+          <p><a href="{% url 'edit_comment' comment_id=comment.pk %}">Edit</a></p>
+          {% endif %}
+          <hr>
+      </div>
+      {% endfor %}
+  </div>
+  {% endif %}

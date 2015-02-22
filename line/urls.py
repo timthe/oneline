@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
-urlpatterns = patterns('', 
+urlpatterns = patterns('',
+    url(r'^medicine/$', 'line.views.medicine_list', name='medicine_list'), 
     url(r'^(?P<item_pk>\d+)/$', 'line.views.detail_view', name='detail_view'),
     url(r'^newline$', 'line.views.new_line', name='new_line'),
     url(r'^newcategory$', 'line.views.new_category', name='new_category'),

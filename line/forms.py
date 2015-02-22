@@ -12,12 +12,9 @@ class ItemForm(forms.models.ModelForm):
 
     class Meta:
         model = Item
-        fields = ('category', 'title', 'text', 'user',)
+        fields = ('mtype', 'category', 'title', 'picture', 'text', 'user',)
         widgets = {
-        'text': forms.fields.TextInput(attrs={
-            'placeholder': 'Enter a line', 
-            }),
-        'user': forms.HiddenInput()
+                'user': forms.HiddenInput()
         }
 
     # def save(self):
